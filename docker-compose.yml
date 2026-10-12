@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  yawstar-pot-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yawstar-pot-server
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
