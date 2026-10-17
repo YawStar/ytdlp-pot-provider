@@ -102,11 +102,17 @@ class YawStarHTTPPTP(YawStarPTPBase):
     ) -> PoTokenResponse:
         challenge = self._get_attestation(request.video_webpage)
 
+        # Video ID ကို request ထဲမှ ရယူခြင်း (ရှိလျှင် URL တွင် v=... ဖြင့် ပူးတွဲပို့မည်)
+        video_id = getattr(request, 'video_id', None) or 'Unknown'
+        target_url = f'{self._base_url}/get_pot'
+        if video_id != 'Unknown':
+            target_url = f'{target_url}?v={video_id}'
+
         try:
             # Go Server ဆီသို့ POST Request ဖြင့် PO Token လှမ်းတောင်း
             response = self._request_webpage(
                 request=Request(
-                    f'{self._base_url}/get_pot', data=json.dumps({
+                    target_url, data=json.dumps({
                         'bypass_cache': request.bypass_cache,
                         'challenge': challenge,
                         'content_binding': get_webpo_content_binding(request)[0],

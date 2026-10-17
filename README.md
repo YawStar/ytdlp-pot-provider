@@ -99,6 +99,8 @@ The Go server includes built-in endpoints for monitoring and management (secured
 * **Version Check**: `http://127.0.0.1:8080/version`
 * **Shutdown Server**: `http://127.0.0.1:8080/shutdown`
 * **Restart Server**: `http://127.0.0.1:8080/restart`
+* **Get poToken**: `http://127.0.0.1:8080/get_pot`
+* **Clear Cache**: `http://127.0.0.1:8080/clear_cache`
 * **Server Health**: `http://127.0.0.1:8080/health`
 * **Server Status**: `http://127.0.0.1:8080/status`
 

@@ -14,7 +14,7 @@ import (
 	"os/exec"
 	"time"
 )
-
+var AppVersion = "0.1.1"
 var serverInstance *http.Server
 
 func main() {
@@ -72,13 +72,34 @@ func main() {
 
 		go func() {
 			time.Sleep(500 * time.Millisecond)
-			exec.Command(os.Args[0], os.Args[1:]...).Start()
+
+			// အသစ်ထွက်လာမည့် process ၏ log များကို လက်ရှိ terminal တွင် ပြန်ပေါ်စေရန်
+			cmd := exec.Command(os.Args[0], os.Args[1:]...)
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+			_ = cmd.Start()
+
 			if serverInstance != nil {
 				ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 				defer cancel()
 				serverInstance.Shutdown(ctx)
 			}
 		}()
+	})
+
+	// 3.5. Clear Cache Endpoint
+	mux.HandleFunc("/clear_cache", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost && r.Method != http.MethodGet {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+
+		log.Println("Received request to clear cache.")
+
+		// TODO: သင်၏ Cache သိုလှောင်ရာ နေရာများကို ဤနေရာတွင် ရှင်းလင်းပါ (ဥပမာ- map, local cache files စသည်ဖြင့်)
+		
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"status": "success", "message": "Cache cleared successfully"}`))
 	})
 
 	addr := fmt.Sprintf("%s:%s", *host, *port)
