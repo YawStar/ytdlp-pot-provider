@@ -1,3 +1,6 @@
+# getpot_yawstar.py
+# version 0.1.1
+
 from __future__ import annotations
 
 import functools
@@ -20,7 +23,7 @@ from yt_dlp.networking.exceptions import HTTPError, TransportError
 from yt_dlp.utils import js_to_json
 from yt_dlp.utils.traversal import traverse_obj
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 class YawStarPTPBase(PoTokenProvider):
     PROVIDER_VERSION = __version__

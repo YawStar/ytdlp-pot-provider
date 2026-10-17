@@ -2,12 +2,20 @@ import os
 import subprocess
 import sys
 
-# Build လုပ်မည့် Target ဇယား
+# Build လုပ်မည့် Target ဇယား (32-bit နှင့် 64-bit အစုံအလင်)
 targets = [
-    {"os": "windows", "arch": "amd64", "ext": ".exe"},
-    {"os": "linux", "arch": "amd64", "ext": ""},
-    {"os": "darwin", "arch": "amd64", "ext": ""},      # Intel Mac
-    {"os": "darwin", "arch": "arm64", "ext": ""},      # Apple Silicon Mac (M1/M2/M3)
+    # 64-bit Targets
+    {"os": "windows", "arch": "amd64", "ext": ".exe"},  # Windows 64-bit
+    {"os": "windows", "arch": "arm64", "ext": ".exe"},  # Windows ARM64
+    {"os": "linux", "arch": "amd64", "ext": ""},        # Linux 64-bit
+    {"os": "linux", "arch": "arm64", "ext": ""},        # Linux / Android Termux ARM64
+    {"os": "darwin", "arch": "amd64", "ext": ""},       # Intel Mac
+    {"os": "darwin", "arch": "arm64", "ext": ""},       # Apple Silicon Mac
+    
+    # 32-bit Targets (လိုအပ်ပါက ထည့်သွင်းရန်)
+    {"os": "windows", "arch": "386", "ext": ".exe"},    # Windows 32-bit (x86)
+    {"os": "linux", "arch": "386", "ext": ""},          # Linux 32-bit (x86)
+    {"os": "linux", "arch": "arm", "ext": ""},          # Linux ARM 32-bit (Raspberry Pi စသည်တို့အတွက်)
 ]
 
 def build():

@@ -1,3 +1,6 @@
+// main.go
+// version 0.1.1
+
 package main
 
 import (
@@ -25,7 +28,7 @@ func main() {
 	// 1. Version Endpoint
 	mux.HandleFunc("/version", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte(`{"name": "ytdlp-pot-provider", "version": "0.1.0"}`))
+		w.Write([]byte(`{"name": "ytdlp-pot-provider", "version": "0.1.1"}`))
 	})
 
 	// 2. Health Check Endpoint (လွယ်ကူစွာ server အခြေအနေ စစ်ဆေးရန်)

@@ -1,0 +1,28 @@
+# Go binaries and build outputs
+/server/yawstar-server
+/dist/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# Distrubatle file
+dist/
+
+# IDE and Editor specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
